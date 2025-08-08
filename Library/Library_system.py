@@ -5,18 +5,32 @@ This file will handle;
     3. For instant mentods you need use self because it exposes the attributes.
     4. __init__ : It makes the attribute avalilabe to the objects.
 """
+"""
+Further improvements:
+1. Add a book count that is deducted once a book has been borrowed.
+2. Add a json file for storing book properties.
+3. Prompt the user to add the quantity of books.
+4. Check wheather book is available in the shelf first.
+5. The user searches for the book using the title.
+6. The ISBN is important to the  librarian.
+Note: Books with the same title and writen by the same author have a similar ISBN.
+
+
+"""
+
 
 class Book:
     #class book captures the books metadata
-    def __init__(self, title, author, isbn ): # further improvements one can add category
+    def __init__(self, title, author, book_id ): # further improvements one can add category
         self.title = title
         self.author = author
-        self.isbn = isbn
+        self.book_id = book_id
         self.available = True
+        self.count = 0
         
         #display books
     def __str__(self):
-        return f"{self.title} by {self.author}, {self.isbn}"# further development add an if statement to check the book status
+        return f"{self.title} by {self.author}, {self.book_id}"# further development add an if statement to check the book status
     
 class Users:
     # Captures users/memebers information
@@ -66,9 +80,9 @@ class Library_system(Book, Users):
         
         
     #     '''
-    #     book (isbn)-> Availabily
+    #     book (book_id)-> Availabily
     #     user (id) -> is the user registered
-    #     book = (i-> isbn  if i == not  available) none)
+    #     book = (i-> book_id  if i == not  available) none)
     #     status = "available" if available == True else "borrow"
     #     '''
         
