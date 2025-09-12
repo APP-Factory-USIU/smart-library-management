@@ -63,14 +63,14 @@ class Library_system(Book, Users):
     
     def borrow(self, book_choice):
         if book_choice in self.Borrowed_books:
-            return f"'{book_choice}'is not available"            
+            return f"'{book_choice}'is not available"           
         else:
-            for book_choice in self.Books:               
-                if book_choice in self.Books:
+            for i in self.Books:               
+                if book_choice ==  i:
                     self.Books.remove(book_choice)
-                    self.Borrowed_books.append(book_choice)      
-                else:
-                    return f"'{book_choice}' not in the library"
+                    self.Borrowed_books.append(book_choice)
+                    return f"You have borrowed '{book_choice}'"      
+            return(f"{book_choice} not in the library")
                 
                 
     def return_book(self):
