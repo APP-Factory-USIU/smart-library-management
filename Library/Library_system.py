@@ -68,10 +68,13 @@ class Library_system(Book, Users):
             for book_choice in self.Books:               
                 if book_choice in self.Books:
                     self.Books.remove(book_choice)
-                    self.Borrowed_books.append(book_choice)   
-                    
+                    self.Borrowed_books.append(book_choice)      
                 else:
-                    return f"'{book_choice}' not in the library"     
+                    return f"'{book_choice}' not in the library"
+                
+                
+    def return_book(self):
+        pass     
         
             
         
