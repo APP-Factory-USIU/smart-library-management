@@ -17,6 +17,9 @@ Note: Books with the same title and writen by the same author have a similar ISB
 
 
 """
+import json
+
+filename1 = 'book_database.json'
 
 
 class Book:
@@ -45,7 +48,23 @@ class Users:
         table = f"|{self.name:<10}|{self.email:<30}|{self.user_ID:<7}|"
         print(table)
         
-class Library_system(Book, Users):
+        
+class Book_Database:
+    def __init__(self, content):
+        self.content = content
+        
+    def fetch_content(self, filename):
+        with open(filename, 'r') as f:
+            data = json.load(f)
+        return data
+        
+    def add_content(self, filename):
+        with open(filename, 'a') as file_obj:
+            data = json.dumps(file_obj)
+        return data
+               
+        
+class Library_system(Book, Users, Book_Database):
     def __init__(self):
         #super().__init__(self, available)
         self.Books = []
@@ -61,18 +80,59 @@ class Library_system(Book, Users):
         self.User.append(users)
         print(f"'{users}' has been added")
         
+        
+    def show_available_books(self):
+        data = self.fetch_content(filename1)
+        print('\n')
+        
+        test = []
+        
+        content = data["available_books"]
+        for i in range(len(content)):
+            info = content[i]["title"]
+            test.append(info)
+            # print(f"{i + 1}. {info}")
+        return test
+        
+        
+    def show_borrowed_books(self):
+        data = self.fetch_content(filename1)
+        print('\n')
+        
+        test = []
+        
+        content = data["borrowed_books"]
+        for i in range(len(content)):
+            info = content[i]["title"]
+            test.append(info)
+            # print(f"{i + 1}. {info}")
+        return test        
     
+                
     def borrow(self, book_choice):
-        if book_choice in self.Borrowed_books:
-            return f"'{book_choice}'is not available"           
+        data = self.fetch_content(filename1)
+        borrow_content = data['borrowed_books']
+        available_content = data['available_books']
+        
+        if book_choice in self.show_borrowed_books():
+            return f"'{book_choice}' is not available"           
         else:
-            for i in self.Books:               
-                if book_choice ==  i:
-                    self.Books.remove(book_choice)
-                    self.Borrowed_books.append(book_choice)
+            for index in range(len(available_content)):
+                # i = available_content[index]
+                if book_choice == available_content[index]["title"]:
+                    i = available_content[index]
+                    print(i)
+                    available_content.remove(i)
+                    
+                    # Add content to borrowed books
+                    borrow_content.append(i)
+                    
+                    # Updated the JSON File
+                    with open(filename1, 'w') as file:
+                        json.dump(data, file, indent=4)
+                        
                     return f"You have borrowed '{book_choice}'"      
             return(f"{book_choice} not in the library")
-                
                 
     def return_book(self, book_choice):
         if book_choice in self.Borrowed_books:

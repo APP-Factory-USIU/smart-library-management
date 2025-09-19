@@ -1,0 +1,26 @@
+{
+    "available_books": [
+        {
+            "title": "Hello Earth1",
+            "author": "tom1"
+        },
+        {
+            "title": "Hello Earth2",
+            "author": "tom2"
+        }
+    ],
+    "borrowed_books": [
+        {
+            "title": "python",
+            "author": "auth1"
+        },
+        {
+            "title": "Borrowed2",
+            "author": "auth2"
+        },
+        {
+            "title": "Hello Earth",
+            "author": "tom"
+        }
+    ]
+}
