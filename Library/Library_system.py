@@ -51,6 +51,7 @@ class Library_system(Book, Users):
         self.Books = []
         self.User = []
         self.Borrowed_books = []
+        self.book_count = 0
         
     def add_book(self, books):
         self.Books.append(books)
@@ -73,8 +74,15 @@ class Library_system(Book, Users):
             return(f"{book_choice} not in the library")
                 
                 
-    def return_book(self):
-        pass     
+    def return_book(self, book_choice):
+        if book_choice in self.Borrowed_books:
+            self.Borrowed_books.remove(book_choice)
+            self.Books.append(book_choice)
+        
+            
+            
+            
+               
         
             
         
