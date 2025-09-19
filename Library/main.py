@@ -31,7 +31,8 @@ while True:
         print(library.borrow(book_name))
       
     elif choice == '4':
-        pass
+        book_name = input("Enter book name to return: ")
+        print(library.return_book(book_name))
     elif choice == '5':
         exit()
     else:

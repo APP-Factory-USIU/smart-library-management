@@ -78,7 +78,9 @@ class Library_system(Book, Users):
         if book_choice in self.Borrowed_books:
             self.Borrowed_books.remove(book_choice)
             self.Books.append(book_choice)
-        
+            return f"You have returned '{book_choice}'"   
+        else:
+            return f"'{book_choice}' was not borrowed from this library(Check the book name)"     
             
             
             
