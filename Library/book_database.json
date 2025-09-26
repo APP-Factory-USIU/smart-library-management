@@ -1,26 +1,42 @@
 {
     "available_books": [
         {
+            "id": 1,
             "title": "Hello Earth1",
-            "author": "tom1"
+            "author": "tom1",
+            "copies": 34
         },
         {
             "title": "Hello Earth2",
-            "author": "tom2"
+            "author": "tom2",
+            "copies": 45
+        },
+        {
+            "title": "Hello Earth",
+            "author": "tom",
+            "copies": 14
+        },
+        {
+            "title": "Python",
+            "author": "Mark",
+            "copies": 4
+        },
+        {
+            "title": "HTML for beginners",
+            "author": "Shaka",
+            "copies": 50
         }
     ],
     "borrowed_books": [
         {
             "title": "python",
-            "author": "auth1"
+            "author": "auth1",
+            "copies": 2
         },
         {
             "title": "Borrowed2",
-            "author": "auth2"
-        },
-        {
-            "title": "Hello Earth",
-            "author": "tom"
+            "author": "auth2",
+            "copies": 4
         }
     ]
 }
