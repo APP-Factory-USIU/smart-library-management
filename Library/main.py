@@ -17,10 +17,14 @@ library = Library_system ()
 
 
 while True:
-    choice = input("Enter \n1. to add book\n2. to add user, \n3 to borrow book,\n4 to return book:\n5. to exit\n")
+    choice = input(
+        "Enter \n1. to add book\n2. to add user \n3 to borrow book,\n4 to return book:\n5. Update Book\n6. Exit\n"
+        )
     if choice == '1':
         book_name = input("Enter book name: ")
-        library.add_book(book_name)
+        book_author = input("Enter book author: ")
+        copies = int(input("Enter number of copies: "))
+        library.add_book(book_name, book_author, copies)
     elif choice == '2':
         user_name = input("Enter user name: ")
         user_email = input("Enter user email: ")
@@ -35,7 +39,12 @@ while True:
     elif choice == '4':
         book_name = input("Enter book name to return: ")
         print(library.return_book(book_name))
+        
     elif choice == '5':
+        book_title = input("Enter book name to update: ")
+        copies = int(input("Enter number of copies: "))
+        library.update_books(book_title, copies)
+    elif choice == '6':
         exit()
     else:
         print("Invalid choice")

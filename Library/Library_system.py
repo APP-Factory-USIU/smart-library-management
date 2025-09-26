@@ -60,22 +60,51 @@ class Book_Database:
         
     def add_content(self, filename):
         with open(filename, 'a') as file_obj:
-            data = json.dumps(file_obj)
-        return data
+            # content = filename[0]
+            data = json.dump(file_obj)
+        return data 
                
         
 class Library_system(Book, Users, Book_Database):
-    def __init__(self):
-        #super().__init__(self, available)
-        self.Books = []
-        self.User = []
-        self.Borrowed_books = []
-        self.book_count = 0
-        
-    def add_book(self, books):
-        self.Books.append(books)
-        print(f"Book '{books}' added.")    
        
+    def add_book(self, book_title, book_author, copies):
+        data = self.fetch_content(filename1)
+        
+        try:
+            with open(filename1, 'r') as file:
+                data = json.load(file)
+        except FileNotFoundError:
+            data = {}
+            
+        # specific_key = data['available_books']
+        content = {"title": book_title, "author": book_author, "copies": copies}
+        data['available_books'].append(content)
+        
+        with open(filename1, 'w') as file:
+            json.dump(data, file, indent=4)
+        
+        
+        print(f"Book '{book_title}' added.") 
+        
+    def update_books(self, book_title, copies):
+        data = self.fetch_content(filename1)
+        
+        for index in range(len(data["available_books"])):
+            if book_title in data['available_books'][index]['title']:
+                print("Book Found")
+                count = data['available_books'][index]
+                current_count = data['available_books'][index]['copies']
+                count.update({
+                    "copies": current_count + copies
+                })
+                print(data['available_books'][index]['copies'])
+                
+            with open(filename1, 'w') as file:
+                json.dump(data, file, indent=4)
+        
+        return f"'{book_title}' has been updated."
+        
+           
     def add_users(self, users):
         self.User.append(users)
         print(f"'{users}' has been added")
@@ -132,20 +161,27 @@ class Library_system(Book, Users, Book_Database):
                         json.dump(data, file, indent=4)
                         
                     return f"You have borrowed '{book_choice}'"      
-            return(f"{book_choice} not in the library")
-        
-                
+            return(f"{book_choice} not in the library")    
+    
+       
     def return_book(self, book_choice):
-        if book_choice in self.Borrowed_books:
-            self.Borrowed_books.remove(book_choice)
-            self.Books.append(book_choice)
-            return f"You have returned '{book_choice}'"   
-        else:
-            return f"'{book_choice}' was not borrowed from this library (Check the book name)"     
-            
-            
-            
-               
+        data = self.fetch_content(filename1)
+        borrow_content = data['borrowed_books']
+        available_content = data['available_books']
+        
+        # if book_choice in self.show_borrowed_books():
+        for index in range(len(borrow_content)):
+            if book_choice == borrow_content[index]['title']:
+                i = borrow_content[index]
+                
+                borrow_content.remove(i)
+                
+                available_content.append(i)
+                
+                with open(filename1, 'w') as f:
+                    json.dump(data, f, indent=4)
+                
+                return f"You have returned '{book_choice}'"
         
             
         
