@@ -66,19 +66,6 @@ class Book_Database:
                
         
 class Library_system(Book, Users, Book_Database):
-    def __init__(self):
-        #super().__init__(self, available)
-        self.Books = []
-        self.User = []
-        self.Borrowed_books = []
-        self.book_count = 0
-        
-    # def add_book(self, books):
-    #     self.Books.append(books)
-    #     print(f"Book '{books}' added.") 
-        
-        
-           
        
     def add_book(self, book_title, book_author, copies):
         data = self.fetch_content(filename1)
@@ -174,18 +161,7 @@ class Library_system(Book, Users, Book_Database):
                         json.dump(data, file, indent=4)
                         
                     return f"You have borrowed '{book_choice}'"      
-            return(f"{book_choice} not in the library")
-        
-                
-    # def return_book(self, book_choice):
-    #     if book_choice in self.Borrowed_books:
-    #         self.Borrowed_books.remove(book_choice)
-    #         self.Books.append(book_choice)
-    #         return f"You have returned '{book_choice}'"   
-    #     else:
-    #         return f"'{book_choice}' was not borrowed from this library (Check the book name)"  
-    
-    
+            return(f"{book_choice} not in the library")    
     
        
     def return_book(self, book_choice):
@@ -206,20 +182,6 @@ class Library_system(Book, Users, Book_Database):
                     json.dump(data, f, indent=4)
                 
                 return f"You have returned '{book_choice}'"
-        
-            
-            
-            
-            
-        #     self.Borrowed_books.remove(book_choice)
-        #     self.Books.append(book_choice)
-        #     return f"You have returned '{book_choice}'"   
-        # else:
-        #     return f"'{book_choice}' was not borrowed from this library (Check the book name)"     
-            
-            
-            
-               
         
             
         
